@@ -1,0 +1,111 @@
+-gallery_images = ["budin-naranja.jpeg","keylimepie.jpeg","minitartatoffi.jpeg","tortachocolatosa.jpeg","tartafrutillakiwibanana.jpeg","tartafrutillakiwi.jpeg","tartachocolate1.jpeg","lemonpie.jpeg"]
+!!!5
+%html
+	%head
+		%meta{charset:"utf-8"}
+		%title DulcesBudinis
+		%meta{name:"description", content:""}
+		%link{rel:"preconnect", href:"https://fonts.googleapis.com"}
+		%link{href:"https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap", rel:"stylesheet"}
+		%link{rel:"stylesheet", href:"css/normalize.css"}
+		%link{rel:"stylesheet", href:"css/bootstrap.css"}
+		%link{rel:"stylesheet", href:"css/flexboxgrid.min.css"}
+		%link{rel:"stylesheet", href:"css/style.css"}
+		%meta{name:"viewport", content:"width=device-width, initial-scale=1"}
+		%script{src:"./js/vendor/modernizr-3.11.7.min.js"}
+	%body
+		.video-container
+			%video{autoplay:true,loop:true,width:"1280",height:"720"}
+				%source{src:"./videos/mp4/tarta.mp4",typ:"video/mp4"}
+				%source{src:"./videos/mp4/tarta.webm",typ:"video/webm"}
+		.row.full-height.middle-xs.center-xs.relative.up.white-text#home
+			.col-xs-12	
+				.box
+					%h1.courgette.title.no-margin DulcesBudinis
+					%img{src:"./imagenes/Dulcesbudinislogo.png"}
+					%p#is-open 
+						%i.glyphicon.glyphicon-time
+						Encargos para fin de semanas y feriados 
+			%nav.fixed.top.right.navigation#navigation
+				-menu = [{title:"Home", link:"#home"}, {title:"Menú", link:"#menu"}, {title:"Galería", link:"#gallery"}, {title:"Contacto", link:"#contact"}]
+				%ul.list-inline
+					-menu.each do |item|
+						%li
+							%a{href:item[:link]}= item[:title]
+			.absolute.black.large-padding.white-text.full-width#description
+				.row.middle-xs.center-xs
+					.col-xs-7.col-sm-6.white-text.medium
+						Calidad, atención y una experiencia deliciosa.
+					.col-xs#sticky-navigation
+						.box
+							%nav.text-right.navigation#responsive-nav
+								%i.glyphicon.glyphicon-menu-hamburger.white-text.subtitle.glyphicon.glyphicon-remove#menu-opener
+								%ul.list-inline
+									-menu.each do |item|
+										%li
+											%a{href:item[:link]}= item[:title]
+	.text-center.relative#menu
+		.absolute.white#menu-title
+			%h2.title Menú
+		-menu_photos = [{name:"Tarta Frutal", pricing:"$600", image:"tartafrutillakiwibanana"}, {name:"Keylimepie", pricing:"$500", image:"keylimepie"}, {name:"Tarta Toffi", pricing:"$500", image:"tartachocolate"}, {name:"Tarta Frutal 2.0", pricing:"$600", image:"tartafrutillakiwi"}, {name:"Torta Chocolatosa", pricing:"$300", image:"tortachocolatosa"}, {name:"Lemon Pie", pricing:"$500", image:"lemonpie"}, {name:"Mini Tarta Toffi", pricing:"$100", image:"minitartatoffi"}, {name:"Budin Naranja", pricing:"$200", image:"budin-naranja"} ] 		
+		 		
+
+		.row
+			-menu_photos.each do |photo|
+				.col-md-4.col-lg-3.col-sm-6.col-xs-12.food{style:"background-image:url(./imagenes/food/#{photo[:image]}-thumb.jpeg)"}
+					.screen
+						.row.middle-xs.full-height
+							.col-xs-12.white-text
+								%h3.subtitle= photo[:name]
+								%p.no-margin= photo[:pricing] 
+
+	#gallery
+		.inner
+			-gallery_images.each do |image|
+				.image{style:"background-image:url(./imagenes/food/#{image})"}
+
+	.container
+		.card.white.black-text.text-center.relative
+			%h3.medium.slim 
+				%p.text-justify.top-space
+					Nos encontramos en el barrio las Flores del partido de Moreno oeste de Buenos Aires.
+					.large-padding.medium.black.white-text.text-center Puedes ingresar a esta página sin conexión a Internet.
+
+				
+
+	.black.white-text.full-height#contact
+		.row.middle-xs.full-height
+			.col-xs-12
+				.box
+					%p.text-center.medium#info-contacto Presiona enter para llenar el campo correspondiente y enviarnos un correo.
+					%form{action:"https://formspree.io/f/mzbyjpye",method:"POST",id:"contact-form",class:"step-form"}
+						.row.center-xs
+							.col-xs-12.col-sm-2.col-md-1.first-sm
+								.box
+									-3.times do |i|
+										-if i == 0
+											.path-step.active
+										-else
+											.path-step				
+							.col-xs-12.col-sm-3.first-xs
+								.box
+									%fieldset.step.active
+										%input{type:"email",name:"email",placeholder:"Coloca tu correo electrónico",class:"input",required:true}
+									%fieldset.step	
+										%input{type:"text",name:"name",placeholder:"¿Cual es tu nombre?",class:"input",required:true}
+									%fieldset.step	
+										%textarea{name:"body",placeholder:"¿En que podemos ayudarte?",class:"input",required:true}
+									%div
+										%button#boton{type:"submit",class:"btn btn-success"}
+											Enviar
+											
+
+	%script{src:"https://code.jquery.com/jquery-3.6.0.min.js",  integrity:"sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=",
+	crossorigin:"anonymous"}
+
+	:javascript
+		window.jQuery || document.write("<script src=´./js/vendor/._jquery-1.12.0.min.js´><\/script>");			
+	%script{src:"./dist/main.js"}
+	%script{src:"./dist/form_object.js"}
+	%script{src:"./dist/steps.js"}
+
